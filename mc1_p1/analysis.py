@@ -17,7 +17,6 @@ def plot_portfolio(daily_values):
 	plt.ylabel('Normalize price')
 	plt.xlabel('Date')
 	plt.title('Daily portfolio value')
-	# plt.show()
 	fig.savefig("output/results.png")
 	fig.show()
 
@@ -53,15 +52,9 @@ if __name__ == "__main__":
 	end_date = dt.datetime(2010,12,31)
 	allocations = [0.2, 0.3, 0.4, 0.1]
 	symbols = ['GOOG', 'AAPL', 'GLD', 'XOM']
-	# symbols_with_BTC = ['GOOG', 'AAPL', 'GLD', 'BTC']
 	daily_values = util.portfolio_setup(start_date, end_date, allocations, symbols)
-	# daily_values_with_BTC = util.portfolio_setup(start_date, end_date, allocations, symbols_with_BTC)
 	daily_returns = daily_values / daily_values.shift(1) - 1
-	# daily_returns_with_BTC = daily_values_with_BTC / daily_values_with_BTC.shift(1) - 1
 	cr, adr, sddr, sr = portfolio_stats(daily_values, daily_returns, sample_frequency, risk_free_rate)
-	# cr_with_BTC, adr_with_BTC, sddr_with_BTC, sr_with_BTC = portfolio_stats(daily_values_with_BTC, daily_returns_with_BTC, sample_frequency, risk_free_rate)
 	plot_portfolio(daily_values)
 	output_results(start_date, end_date, symbols, allocations, sr, sddr, adr, cr)
-	# print_output(start_date, end_date, symbols_with_BTC, allocations, sr_with_BTC, sddr_with_BTC, adr_with_BTC, cr_with_BTC)
-
 
